@@ -58,7 +58,7 @@ podTemplate(label: 'petclinic',
         }
         stage("FunctionalTest"){
             echo("Testinium functional tests");
-            testiniumExecution failOnTimeout: true, planId: 2975, projectId: 1658, timeoutSeconds: 600
+            testiniumExecution failOnTimeout: true, planId: 2979, projectId: 1659, timeoutSeconds: 600
         }
         }
         finally {
