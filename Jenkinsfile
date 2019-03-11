@@ -53,9 +53,9 @@ podTemplate(label: 'petclinic',
         }
         stage('Deploy') { 
             def envMap = [
-                development: 'development',
+                development: 'dev',
                 test: 'test',                    
-                master: 'production'
+                master: 'prod'
             ]
             def env_x = envMap[env.BRANCH_NAME] 
             def GIT_COMMIT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()

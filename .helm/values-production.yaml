@@ -1,8 +1,8 @@
-env: dev
+env: prod
 
 image:
   tag: 1.0
-  name: zeppelinops/petclinic
+  name: zeppelinops/petclinic-production
 
 petclinic:
   name: petclinic
