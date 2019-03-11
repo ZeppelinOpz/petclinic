@@ -22,7 +22,7 @@ podTemplate(label: 'petclinic',
             }
         }
         stage('Build docker image') {
-            if(env.BRANCH_NAME == "development" || env.BRANCH_NAME == "staging" || env.BRANCH_NAME == "master" ) {
+            if(env.BRANCH_NAME == "development" || env.BRANCH_NAME == "test" || env.BRANCH_NAME == "master" ) {
                 def GIT_COMMIT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()            
                 container('docker') {
 
