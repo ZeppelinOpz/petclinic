@@ -31,7 +31,10 @@ spec:
       containers:
       - name:  {{ .Values.env }}-{{ .Values.petclinic.name }}-container
         image: {{ .Values.image.name }}:{{ .Values.image.tag }}
-        args: ["java", "-jar", "app.jar"]
+        env:
+        - name: SPRING_PROFILE
+          value: {{ .Values.spring.profile | quote }}            
+        args: ["java", "-jar", "app.jar","-Dspring.profiles.active=$(SPRING_PROFILE)"]
         ports:
         - containerPort: {{ .Values.petclinic.port }}
         resources:
@@ -41,3 +44,4 @@ spec:
           requests:
             cpu: {{ .Values.petclinic.cpu_requests }}
             memory: {{ .Values.petclinic.mem_requests }}
+    
