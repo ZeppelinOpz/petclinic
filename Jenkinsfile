@@ -85,10 +85,13 @@ podTemplate(label: 'petclinic',
             } 
         }
         stage("FunctionalTest"){
-            if(env.BRANCH_NAME == "test" || env.BRANCH_NAME == "master" ) {
-                echo("Testinium functional tests");
+            if(env.BRANCH_NAME == "test" ) {
+                echo("Testinium functional tests TEST environment");
                 testiniumExecution failOnTimeout: true, planId: 2979, projectId: 1659, timeoutSeconds: 600
-            }
+            } else if(env.BRANCH_NAME == "master") {
+                echo("Testinium functional tests PROD environment");
+                testiniumExecution failOnTimeout: true, planId: 3028, projectId: 1659, timeoutSeconds: 600       
+            }        
         }
         }
         finally {
