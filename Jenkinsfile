@@ -16,9 +16,16 @@ podTemplate(label: 'petclinic',
         stage('Checkout') {
             checkout scm
         }
+        stage('UnitTest') {
+            if(env.BRANCH_NAME == "development") {
+                container('maven') {
+                    sh 'unset MAVEN_CONFIG && ./mvnw test'
+                }
+            }
+        }
         stage('Build package') {
             container('maven') {
-                sh 'unset MAVEN_CONFIG && ./mvnw package'
+                sh 'unset MAVEN_CONFIG && ./mvnw package -DskipTests'
             }
         }
         stage('Build docker image') {
@@ -78,7 +85,7 @@ podTemplate(label: 'petclinic',
             } 
         }
         stage("FunctionalTest"){
-            if(env.BRANCH_NAME == "development" || env.BRANCH_NAME == "test" || env.BRANCH_NAME == "master" ) {
+            if(env.BRANCH_NAME == "test" || env.BRANCH_NAME == "master" ) {
                 echo("Testinium functional tests");
                 testiniumExecution failOnTimeout: true, planId: 2979, projectId: 1659, timeoutSeconds: 600
             }
