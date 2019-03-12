@@ -22,3 +22,6 @@ hpa:
   minReplicas: 2
   maxReplicas: 4
   targetCPUUtilizationPercentage: 50
+
+spring:
+  profile: production
